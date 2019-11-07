@@ -1,15 +1,16 @@
 <?php
 
-require_once 'date.php';
+    require_once 'date.php';
 
-$timeTravel = new timeTravel(new DateTime('1985-12-31'), new DateTime());
+        $interval = new \DateInterval('PT1000000000S');
+        $startDate = new \DateTimeImmutable('1985-12-31T00:00:00.00000Z');
+        $timeTravel = new TimeTravel($startDate);
+        $endDate = $timeTravel->findDate($interval);
 
-    echo $timeTravel->getTravelInfo();
+            var_dump($endDate);
+            var_dump($timeTravel->getTravelInfo);
 
-$date = $timeTravel->finDate(1000000000);
+        $stepByStepInterval = new \DateInterval('P1M8D');
+        $stepByStepPeriod = new \DatePeriod($endDate, $stepByStepInterval, $startDate);
 
-    echo $date->format('Y-m-d');
-
-$results = $timeTravel->retourVersLeFutur(new DateInterval("P1M1W1D"));
-
-    var_dump($results);
+            var_dump($timeTravel->backToFutureStepByStep($stepByStepPeriod));
